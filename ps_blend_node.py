@@ -95,8 +95,8 @@ class PSBlendNode:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "Image1": ("IMAGE",),
-                "Image2": ("IMAGE",),
+                "image1": ("IMAGE",),
+                "image2": ("IMAGE",),
                 "blend_mode": (["Normal", "Dissolve", "Darken", "Multiply", "Color Burn", "Linear Burn", "Darker Color", "Lighten", "Screen", "Color Dodge", "Linear Dodge", "Lighter Color", "Overlay", "Soft Light", "Hard Light", "Vivid Light", "Linear Light", "Pin Light", "Hard Mix", "Difference", "Exclusion", "Subtract", "Divide", "Hue", "Saturation", "Color", "Luminosity"],),
                 "opacity": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
             },
