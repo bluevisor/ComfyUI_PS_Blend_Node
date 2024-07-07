@@ -26,8 +26,8 @@ class PSBlendNode:
         img1 = image1.to(device)
         img2 = image2.to(device)
 
-        self.print_tensor_shape(img1, "img1")
-        self.print_tensor_shape(img2, "img2")
+        # self.print_tensor_shape(img1, "img1")
+        # self.print_tensor_shape(img2, "img2")
 
         # Ensure images have the same shape
         if img1.shape != img2.shape:
@@ -158,18 +158,18 @@ class PSBlendNode:
         elif blend_mode == "Luminosity":
             result = set_lum(img2, lum(img1))
         
-        self.print_tensor_shape(result, "result before opacity")
+        # self.print_tensor_shape(result, "result before opacity")
 
         # Apply opacity
         opacity_tensor = torch.tensor(opacity, device=device).view(1, 1, 1, 1)
-        self.print_tensor_shape(opacity_tensor, "opacity_tensor")
+        # self.print_tensor_shape(opacity_tensor, "opacity_tensor")
         
         result_rgb = img2 * (1 - opacity_tensor) + result * opacity_tensor
         
         # Blend alpha channels
         result_a = img1_a * opacity_tensor + img2_a * (1 - opacity_tensor)
 
-        self.print_tensor_shape(result, "final result")
+        # self.print_tensor_shape(result, "final result")
         
         # Combine RGB and alpha channels
         result = torch.cat([result_rgb, result_a], dim=-1)
