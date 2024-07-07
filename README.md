@@ -18,7 +18,7 @@ git clone https://github.com/bluevisor/ComfyUI_PS_Blend_Node.git PSBlendNode
 ```
 ## Usage
 - To use the PSBlendNode, follow these steps:
--- Load two images into your ComfyUI workflow.
--- Connect the images to the PSBlendNode input.
--- Select a blend mode.
--- Blend away.
+1. Load two images into your ComfyUI workflow.
+2. Connect the images to the PSBlendNode input.
+3. Select a blend mode.
+4. Blend away.
