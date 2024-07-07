@@ -169,7 +169,7 @@ class PSBlendNode:
 
         # Apply opacity
         opacity_tensor = torch.tensor(opacity, device=device).view(1, 1, 1, 1)
-        self.print_tensor_shape(opacity_tensor, "opacity_tensor")
+        # self.print_tensor_shape(opacity_tensor, "opacity_tensor")
         
         result_rgb = img2 * (1 - opacity_tensor) + result * opacity_tensor
         
