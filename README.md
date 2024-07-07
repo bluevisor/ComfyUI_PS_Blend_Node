@@ -1,6 +1,6 @@
 # ComfyUI PS Blend Node
 
-This repository contains a custom node for ComfyUI that implements familiar PS-style blend modes using PyTorch. The `PSBlendNode` allows you to blend two images together using a variety of blend modes and an opacity parameter.
+This repository contains a simple custom node for ComfyUI that implements familiar PS-style blend modes using PyTorch. The `PSBlendNode` allows you to blend two images together using a variety of blend modes and an opacity parameter.
 
 ## Features
 
