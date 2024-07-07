@@ -6,7 +6,8 @@ This repository contains a simple custom node for ComfyUI that implements famili
 
 - Supports multiple blend modes including Normal, Darken, Multiply, Color Burn, Linear Burn, Lighten, Screen, Color Dodge, Linear Dodge, Overlay, Soft Light, Hard Light, Difference, Exclusion, Subtract, Divide, Hue, Saturation, Color, and Luminosity.
 - Blends images with an adjustable opacity setting.
-- Handles images with alpha channels.
+
+- (current version does not support alpha / transparency)
 
 ## Installation
 
