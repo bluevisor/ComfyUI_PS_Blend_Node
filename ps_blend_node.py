@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 
 class PSBlendNode:
     @classmethod
@@ -19,8 +18,16 @@ class PSBlendNode:
     CATEGORY = "image/blending"
 
     def blend_images(self, image1, image2, blend_mode, opacity):
-        # Determine the device (CPU or GPU)
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # GPU availability check
+        if torch.cuda.is_available():
+            print("PS Blend Node is using CUDA.")
+            device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            print("PS Blend Node is using  MPS.")
+            device = torch.device("mps")
+        else:
+            print("No GPU acceleration available, using CPU")
+            device = torch.device("cpu")
 
         # Move tensors to the appropriate device
         img1 = image1.to(device)
@@ -162,7 +169,7 @@ class PSBlendNode:
 
         # Apply opacity
         opacity_tensor = torch.tensor(opacity, device=device).view(1, 1, 1, 1)
-        # self.print_tensor_shape(opacity_tensor, "opacity_tensor")
+        self.print_tensor_shape(opacity_tensor, "opacity_tensor")
         
         result_rgb = img2 * (1 - opacity_tensor) + result * opacity_tensor
         
