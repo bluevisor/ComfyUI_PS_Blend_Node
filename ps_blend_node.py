@@ -18,7 +18,7 @@ class PSBlendNode:
     CATEGORY = "image/blending"
 
     def blend_images(self, image1, image2, blend_mode, opacity):
-        # GPU availability check (remains the same)
+        # GPU availability check
         if torch.cuda.is_available():
             print("PS Blend Node is using CUDA.")
             device = torch.device("cuda")
@@ -29,16 +29,14 @@ class PSBlendNode:
             print("No GPU acceleration available, using CPU")
             device = torch.device("cpu")
 
-        # Move tensors to the appropriate device
         img1 = image1.to(device)
         img2 = image2.to(device)
 
-
         # Ensure images have the same shape
         if img1.shape != img2.shape:
-            raise ValueError("Images must have the same dimensions")
+            raise ValueError("Images must have the same dimensions. Try running them through resize nodes first.")
 
-        # Helper functions (update to handle RGBA)
+        # Helper functions
         def lum(img):
             return 0.3 * img[..., 0] + 0.59 * img[..., 1] + 0.11 * img[..., 2]
 
@@ -76,7 +74,7 @@ class PSBlendNode:
             result = set_lum(set_sat(img1, sat2), lum2)
             return result
 
-        # Blend mode calculations (now including alpha)
+        # Blend mode calculations
         if blend_mode == "Normal":
             result = img1
         elif blend_mode == "Dissolve":
@@ -133,7 +131,6 @@ class PSBlendNode:
                                 torch.max(img2, 2 * img1 - 1))
         elif blend_mode == "Hard Mix":
             sum_img = img1 + img2
-            # Apply the Hard Mix formula
             result = torch.where(sum_img >= 1, torch.ones_like(img1), torch.zeros_like(img1))
         elif blend_mode == "Difference":
             result = torch.abs(img1 - img2)
@@ -153,7 +150,7 @@ class PSBlendNode:
             result = set_lum(img2, lum(img1))
         else:
             print(f"Unsupported blend mode: {blend_mode}")
-            result = img1  # Default to using the top image if blend mode is not recognized
+            result = img1
 
         # Apply opacity
         opacity_tensor = torch.tensor(opacity, device=device).view(1, 1, 1, 1)
@@ -162,11 +159,8 @@ class PSBlendNode:
         # Ensure result is clamped between 0 and 1
         result = torch.clamp(result, 0, 1)
 
-        # Debug print
-        self.print_tensor_shape(result, "final result")
-
         return (result,)
 
-    # Debug method remains the same
+    # Debug method
     def print_tensor_shape(self, tensor, name):
         print(f"{name} shape: {tensor.shape}")
