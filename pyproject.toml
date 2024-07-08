@@ -10,6 +10,6 @@ Repository = "https://github.com/bluevisor/ComfyUI_PS_Blend_Node"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "bluevisor"
 DisplayName = "ComfyUI_PS_Blend_Node"
 Icon = ""
