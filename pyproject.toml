@@ -1,0 +1,15 @@
+[project]
+name = "comfyui_ps_blend_node"
+description = "This repository contains a simple custom node for ComfyUI that implements familiar PS-style blend modes using PyTorch. The PSBlendNode allows you to blend two images together using a variety of blend modes and an opacity parameter."
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["torch"]
+
+[project.urls]
+Repository = "https://github.com/bluevisor/ComfyUI_PS_Blend_Node"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "bluevisor"
+DisplayName = "ComfyUI_PS_Blend_Node"
+Icon = ""
